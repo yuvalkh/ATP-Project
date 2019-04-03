@@ -87,7 +87,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
     }
-    private void breakWall(Position a , Maze MyMaze) //break random wall of neighbor
+    private void breakWall(Position a , Maze MyMaze) //break random wall of neighbors
     {
         int ARow=a.getRowIndex();
         int ACol=a.getColumnIndex();
