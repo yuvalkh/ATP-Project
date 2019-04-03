@@ -44,7 +44,7 @@ public class SearchableMaze extends Maze implements ISearchable{
         if(CurrentRow+1 < getNumOfRows() && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow+1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow+1][CurrentColumn-1] == 0 )//if top right is blank
             Successors.add(new MazeState(CurrentRow+1,CurrentColumn-1,state));
 
-
+//hoo tov
         if(CurrentRow-1 >= 0 && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow-1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow-1][CurrentColumn-1] == 0 )//if top right is blank
             Successors.add(new MazeState(CurrentRow-1,CurrentColumn-1,state));
 
