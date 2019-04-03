@@ -5,6 +5,8 @@ public class MyMazeGenerator extends AMazeGenerator {
     public Maze generate(int rows, int columns) {
         //make a maze by Prim/Kruskal/DFS/Recursive algorithm
 
-        return null;
+        //return null;
+        SimpleMazeGenerator s = new SimpleMazeGenerator();
+        return s.generate(40,40);
     }
 }

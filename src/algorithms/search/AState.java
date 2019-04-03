@@ -1,5 +1,9 @@
 package algorithms.search;
 
+import org.omg.CORBA.WrongTransactionHelper;
+
+import java.util.Comparator;
+
 public abstract class AState {
     private AState cameFrom;
     private String stateName;
@@ -11,6 +15,18 @@ public abstract class AState {
         cameFrom = from;
     }
 
+    public void setCameFrom(AState cameFrom) {
+        this.cameFrom = cameFrom;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
     public AState getCameFrom() {
         return cameFrom;
     }
@@ -19,5 +35,7 @@ public abstract class AState {
         return stateName;
     }
 
-    public abstract boolean equal(AState state);
+    public abstract boolean equals(Object s);
+
+    public abstract double getDistanceFromGoal(AState Goal);
 }
