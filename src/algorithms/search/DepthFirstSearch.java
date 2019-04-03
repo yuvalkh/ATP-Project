@@ -9,7 +9,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public String getName() {
-        return null;
+        return "DepthFirstSearch";
     }
 
     @Override

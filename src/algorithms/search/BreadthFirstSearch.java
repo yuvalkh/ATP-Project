@@ -10,9 +10,4 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     public String getName() {
         return null;
     }
-
-    @Override
-    public int getNumberOfNodesEvaluated() {
-        return 0;
-    }
 }
