@@ -7,14 +7,14 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(50, 50);
+        Maze maze = mg.generate(70, 70);
         SearchableMaze searchableMaze = new SearchableMaze(maze);
         //searchableMaze.print();
-        solveProblem(searchableMaze, new BreadthFirstSearch(),6);
+        solveProblem(searchableMaze, new BreadthFirstSearch(),10);
         //searchableMaze.print();
-        solveProblem(searchableMaze, new DepthFirstSearch(),7);
+        solveProblem(searchableMaze, new DepthFirstSearch(),11);
         //searchableMaze.print();
-        solveProblem(searchableMaze, new BestFirstSearch(),8);
+        solveProblem(searchableMaze, new BestFirstSearch(),12);
         //searchableMaze.print();
 
     }

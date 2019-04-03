@@ -71,9 +71,9 @@ public class Maze {
                 } else if (i == GoalPosition.getRowIndex() && j == GoalPosition.getColumnIndex()) {//goalPosition
                     System.out.print(" " + "\u001B[44m" + " ");
                 } else if (MazeInfo[i][j] == 1) {System.out.print(" " + "\u001B[45m" + " ");}
-                else if (MazeInfo[i][j] == 6) {System.out.print(" " + "\u001B[41m" + " ");}
-                else if (MazeInfo[i][j] == 7) {System.out.print(" " + "\u001B[42m" + " ");}
-                else if (MazeInfo[i][j] == 8) {System.out.print(" " + "\u001B[43m" + " ");}
+                else if (MazeInfo[i][j] == 10) {System.out.print(" " + "\u001B[41m" + " ");}
+                else if (MazeInfo[i][j] == 11) {System.out.print(" " + "\u001B[42m" + " ");}
+                else if (MazeInfo[i][j] == 12) {System.out.print(" " + "\u001B[43m" + " ");}
 
                 else System.out.print(" " + "\u001B[107m" + " ");
             }

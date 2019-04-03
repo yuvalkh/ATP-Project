@@ -32,7 +32,7 @@ public class SearchableMaze extends Maze implements ISearchable{
         int CurrentColumn = state.getCurrentPosition().getColumnIndex();
         ArrayList<AState> Successors = new ArrayList<>();
 
-
+/*
         if(CurrentRow-1 >= 0 && CurrentColumn+1 < getNumOfColumns() && (MazeInfo[CurrentRow-1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn+1] == 0) && MazeInfo[CurrentRow-1][CurrentColumn+1] == 0 )//if top right is blank
             Successors.add(new MazeState(CurrentRow-1,CurrentColumn+1,state));
 
@@ -44,18 +44,17 @@ public class SearchableMaze extends Maze implements ISearchable{
         if(CurrentRow+1 < getNumOfRows() && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow+1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow+1][CurrentColumn-1] == 0 )//if top right is blank
             Successors.add(new MazeState(CurrentRow+1,CurrentColumn-1,state));
 
-//hoo tov
         if(CurrentRow-1 >= 0 && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow-1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow-1][CurrentColumn-1] == 0 )//if top right is blank
             Successors.add(new MazeState(CurrentRow-1,CurrentColumn-1,state));
+*/
 
-
-        if(CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 0)//if up is blank
+        if(CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 0 || CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 8)//if up is blank
             Successors.add(new MazeState(CurrentRow-1,CurrentColumn,state));
-        if(CurrentColumn+1 < getNumOfColumns() && MazeInfo[CurrentRow][CurrentColumn+1] == 0)//if right is blank
+        if(CurrentColumn+1 < getNumOfColumns() && MazeInfo[CurrentRow][CurrentColumn+1] == 0 || CurrentColumn+1 < getNumOfColumns() && MazeInfo[CurrentRow][CurrentColumn+1] == 8)//if right is blank
             Successors.add(new MazeState(CurrentRow,CurrentColumn+1,state));
-        if(CurrentRow+1 < getNumOfRows() && MazeInfo[CurrentRow+1][CurrentColumn] == 0)//if down is blank
+        if(CurrentRow+1 < getNumOfRows() && MazeInfo[CurrentRow+1][CurrentColumn] == 0 || CurrentRow+1 < getNumOfRows() && MazeInfo[CurrentRow+1][CurrentColumn] == 8)//if down is blank
             Successors.add(new MazeState(CurrentRow+1,CurrentColumn,state));
-        if(CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 0)//if left is blank
+        if(CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 0 || CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 8)//if left is blank
             Successors.add(new MazeState(CurrentRow,CurrentColumn-1,state));
 
 
