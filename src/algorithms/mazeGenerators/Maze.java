@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+import java.util.Random;
+
 public class Maze {
     protected int[][] MazeInfo;
     private int numOfRows;
@@ -9,8 +11,10 @@ public class Maze {
 
     public Maze(Maze maze){//Copy Constructor
         MazeInfo = new int[maze.numOfRows][maze.numOfColumns];
-        for (int i = 0; i < maze.numOfRows ; i++) {
-            for (int j = 0; j < maze.numOfColumns; j++) {
+        for (int i = 0; i < maze.numOfRows ; i++)
+        {
+            for (int j = 0; j < maze.numOfColumns; j++)
+            {
                 this.MazeInfo[i][j] = maze.MazeInfo[i][j];
             }
         }
@@ -71,6 +75,31 @@ public class Maze {
             }
             System.out.println(" " + "\u001B[107m");
         }
+    }
 
+    public void GenerateStartAndEndPoints () {
+        if (numOfRows != 0 && numOfColumns != 0) {
+
+            Random random = new Random();
+
+            /*Make new StartPosition*/
+            Position start = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
+            while (this.MazeInfo[start.getRowIndex()][start.getColumnIndex()] == 1){
+                start.setRowIndex(random.nextInt(this.numOfRows));
+                start.setColumnIndex(random.nextInt(this.numOfColumns));
+            }
+            setStartPosition(start);
+            System.out.println( "start index  = " + getMazeInfo(start.getRowIndex(),start.getColumnIndex()));
+
+            /*Make new GoalPosition*/
+            Position goal = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
+            //goal.getColumnIndex()!= start.getColumnIndex() && goal.getRowIndex() != start.getRowIndex() &&
+            while (this.MazeInfo[goal.getRowIndex()][goal.getColumnIndex()] == 1){
+                goal.setColumnIndex(random.nextInt(this.numOfColumns));
+                goal.setRowIndex(random.nextInt(this.numOfRows));
+            }
+            setGoalPosition(goal);
+            System.out.println( "goal index  = " + getMazeInfo(goal.getRowIndex(),goal.getColumnIndex()));
+        }
     }
 }
