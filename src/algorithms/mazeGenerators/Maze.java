@@ -7,6 +7,19 @@ public class Maze {
     private Position StartPosition;
     private Position GoalPosition;
 
+    public Maze(Maze maze){//Copy Constructor
+        MazeInfo = new int[maze.numOfRows][maze.numOfColumns];
+        for (int i = 0; i < maze.numOfRows ; i++) {
+            for (int j = 0; j < maze.numOfColumns; j++) {
+                this.MazeInfo[i][j] = maze.MazeInfo[i][j];
+            }
+        }
+        this.numOfColumns = maze.numOfColumns;
+        this.numOfRows = maze.numOfRows;
+        this.StartPosition = new Position(maze.StartPosition.getRowIndex(),maze.StartPosition.getColumnIndex());
+        this.GoalPosition = new Position(maze.GoalPosition.getRowIndex(),maze.GoalPosition.getColumnIndex());
+    }
+
     public Maze(int numOfRows, int numOfColumns) {
         this.numOfRows = numOfRows;
         this.numOfColumns = numOfColumns;
@@ -16,6 +29,7 @@ public class Maze {
     public int getMazeInfo(int row,int column){
         return MazeInfo[row][column];
     }
+
     public void setMazeInfo(int row,int column,int data){
         if(row < numOfRows && row >=0 && column < numOfColumns && column >= 0)
         MazeInfo[row][column] = data;

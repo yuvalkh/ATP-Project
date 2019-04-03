@@ -1,4 +1,4 @@
-package search;
+package algorithms.search;
 
 import algorithms.mazeGenerators.Maze;
 
@@ -10,6 +10,9 @@ public class SearchableMaze extends Maze implements ISearchable{
         super(numOfRows, numOfColumns);
     }
 
+    public SearchableMaze(Maze maze){
+        super(maze);
+    }
     @Override
     public AState getStartState() {
         return new MazeState(getStartPosition().getRowIndex(),getStartPosition().getColumnIndex(),null);
