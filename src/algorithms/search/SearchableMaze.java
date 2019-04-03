@@ -28,8 +28,8 @@ public class SearchableMaze extends Maze implements ISearchable{
         if(!(s instanceof MazeState))
             return null;
         MazeState state = (MazeState)s;
-        int CurrentRow = state.currentPosition.getRowIndex();
-        int CurrentColumn = state.currentPosition.getRowIndex();
+        int CurrentRow = state.getCurrentPosition().getRowIndex();
+        int CurrentColumn = state.getCurrentPosition().getRowIndex();
         ArrayList<AState> Successors = new ArrayList<>();
         if(CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 0)
             Successors.add(new MazeState(CurrentRow-1,CurrentColumn,state));

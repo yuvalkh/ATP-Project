@@ -1,6 +1,6 @@
 package algorithms.search;
 
-public class AState {
+public abstract class AState {
     private AState cameFrom;
     private String stateName;
     private double cost;
@@ -18,4 +18,6 @@ public class AState {
     public String getStateName() {
         return stateName;
     }
+
+    public abstract boolean equal(AState state);
 }
