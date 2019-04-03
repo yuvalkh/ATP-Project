@@ -1,18 +1,27 @@
 package algorithms.search;
 
-public class BestFirstSearch extends ASearchingAlgorithm{
-    @Override
-    public Solution solve(ISearchable s) {
-        return null;
-    }
+import java.util.ArrayList;
 
+public class BestFirstSearch extends BreadthFirstSearch{
+
+    /*@Override
+    public Solution solve(ISearchable s) {
+        Solution withCrosses = super.solve(s);
+        ArrayList<AState> Final = withCrosses.getSolutionPath();
+        for (int i=0; i < withCrosses.getSolutionPath().size(); i++) {
+            if(((MazeState)Final.get(i)).getCurrentPosition().getRowIndex())
+        }
+
+        return withCrosses;
+    }*/
     @Override
     public String getName() {
-        return null;
+        return "Best First Search";
     }
 
     @Override
-    public int getNumberOfNodesEvaluated() {
-        return 0;
+    protected void giveCost(AState state){
+        //state.setCost(state.getCameFrom().getCost() + 1);
+        state.setCost(state.getCameFrom().getCost() + state.getDistanceFromGoal(Goal));
     }
 }
