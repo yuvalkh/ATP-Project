@@ -9,11 +9,17 @@ public class Solution {
         Solve = new ArrayList<>();
     }
 
-    public void addState(AState state) {
+    /**
+     *
+     * @param state the state we want to add to the solution
+     */
+    public void addState(AState state){
         Solve.add(state);
     }
 
-    public ArrayList<AState> getSolutionPath() {
-        return Solve;
-    }
+    /**
+     *
+     * @return the solution
+     */
+    public ArrayList<AState> getSolutionPath(){ return Solve; }
 }

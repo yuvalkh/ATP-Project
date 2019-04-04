@@ -45,9 +45,8 @@ public class Maze {
      * @return - value in the specified cell
      */
     public int getMazeInfo(int row, int column) {
-        if (row >= 0 && column >= 0 && row < this.numOfRows && column < this.numOfColumns) {
+        if (row >= 0 && column >= 0)
             return MazeInfo[row][column];
-        }
         return -1;
     }
 
@@ -79,7 +78,9 @@ public class Maze {
      * @return - the Starting Cell of the maze
      */
     public Position getStartPosition() {
-        return StartPosition;
+        if (StartPosition != null)
+            return StartPosition;
+        return null;
     }
 
     /**
@@ -102,7 +103,9 @@ public class Maze {
      * @return - the Goal Cell of the maze
      */
     public Position getGoalPosition() {
-        return GoalPosition;
+        if (GoalPosition != null)
+            return GoalPosition;
+        return null;
     }
 
     /**

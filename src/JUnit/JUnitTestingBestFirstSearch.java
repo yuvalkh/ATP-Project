@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class JUnitTestingBestFirstSearch {
+
     @Test
     public void sendingNullToBestFS() {
         ISearchingAlgorithm bfs = new BestFirstSearch();
@@ -14,9 +15,9 @@ public class JUnitTestingBestFirstSearch {
     }
 
     @Test
-    public void Test2(){//test the implement for several mazes
+    public void Test2() {//test the implement for several mazes
         ISearchingAlgorithm bfs = new BestFirstSearch();
-        for (int i=10; i <= 100;i+=10) {
+        for (int i = 10; i <= 100; i += 10) {
             ISearchable maze = new SearchableMaze(i, i);
             Solution solution = bfs.solve(maze);
             ((SearchableMaze) maze).print();
@@ -32,7 +33,7 @@ public class JUnitTestingBestFirstSearch {
     }
 
     @Test
-    public boolean Test3(){
+    public boolean Test3() {
         ISearchingAlgorithm bfs = new BestFirstSearch();
         return bfs.getName().equals("Best First Search");
     }

@@ -3,8 +3,7 @@ package algorithms.mazeGenerators;
 public class EmptyMazeGenerator extends AMazeGenerator {
 
     /**
-     *
-     * @param rows - number of rows in the maze
+     * @param rows    - number of rows in the maze
      * @param columns -number of columns in the maze
      * @return - the output maze
      */
