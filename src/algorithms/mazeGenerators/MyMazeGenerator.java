@@ -73,7 +73,7 @@ public class MyMazeGenerator extends AMazeGenerator {
      *
      * @param neighbors - list of Positions (Cells)
      * @param temp - a Cell. We will need to find it's neighbors
-     * @param MyMaze - Maze.
+     * @param MyMaze - Maze that we will take neighbor cells from.
      */
     private void addNeighbors(List<Position> neighbors, Position temp ,Maze MyMaze){
         if(temp.getColumnIndex() < MyMaze.getNumOfColumns() && temp.getRowIndex()<MyMaze.getNumOfRows())
@@ -105,10 +105,18 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
     }
+
+    /**
+     *
+     * @param a- when we visited a new cell we want to make him part of the maze
+     *         and not isolate him. so we will break a random wall between him and
+     *         the maze visited cells.
+     * @param MyMaze - we can know which cells we already visited
+     */
     private void breakWall(Position a , Maze MyMaze) //break random wall of neighbors
     {
         int ARow=a.getRowIndex();
-        int ACol=a.getColumnIndex();
+        int ACol=a.getColumnIndex();// A col
         boolean broke = false;
         //boolean Anotherbroke = false;
         Random randomBreake = new Random();
@@ -175,15 +183,4 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
 
     }
-
-   /* private boolean visited (Position temp , List <Position> Visited){
-       for (int i =0 ; i<Visited.size();i++)
-       {
-           if(Visited.get(i).getColumnIndex()== temp.getColumnIndex() && Visited.get(i).getRowIndex()== temp.getRowIndex())
-           {
-               return true;
-           }
-       }
-       return false;
-    }*/
 }

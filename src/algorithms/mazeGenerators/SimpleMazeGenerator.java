@@ -5,6 +5,12 @@ package algorithms.mazeGenerators;
 import java.util.Random;
 
 public class SimpleMazeGenerator extends AMazeGenerator {
+    /**
+     *
+     * @param rows - number of rows in the maze
+     * @param columns -number of columns in the maze
+     * @return - the output maze
+     */
     @Override
     @SuppressWarnings("Duplicates")
     public Maze generate(int rows, int columns) {
