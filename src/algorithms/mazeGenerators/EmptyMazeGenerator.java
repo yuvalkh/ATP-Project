@@ -17,6 +17,7 @@ public class EmptyMazeGenerator extends AMazeGenerator {
                 maze.setMazeInfo(i,j,0);
             }
         }
+        maze.GenerateStartAndEndPoints();
         return maze;
     }
 }

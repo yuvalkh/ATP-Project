@@ -57,9 +57,6 @@ public class SearchableMaze extends Maze implements ISearchable{
         if(CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 0 || CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 8)//if left is blank
             Successors.add(new MazeState(CurrentRow,CurrentColumn-1,state));
 
-
-
-
         return Successors;
     }
 }
