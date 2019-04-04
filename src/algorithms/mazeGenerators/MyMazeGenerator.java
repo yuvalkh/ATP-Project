@@ -21,7 +21,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             MakeNet(MyMaze);
             MyMaze.GenerateStartAndEndPoints();
 
-            //add all the neighbor cells of the GoalPoint
+            //add all the neighbor cells of the GoalPoint.
             addNeighbors(neighbors, MyMaze.getGoalPosition(), MyMaze);
             MyMaze.setMazeInfo(MyMaze.getGoalPosition().getRowIndex(), MyMaze.getGoalPosition().getColumnIndex(), 8);
             /*_^_^_^_^_^_^_^_^_^_^_^_^ Works Until Here(CHECKED) ^_^_^_^_^_^_^_^_^_^_^_^_^_^_*/
