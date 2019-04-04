@@ -9,18 +9,22 @@ public abstract class  AMazeGenerator implements IMazeGenerator{
     /**
      *
      * @param rows - number of rows in the maze
-     * @param columns -number of columns in the maze
+     * @param columns - number of columns in the maze
      * @return- the output maze
      */
     @Override
     public long measureAlgorithmTimeMillis(int rows, int columns) {
         //will run System.currentTimeMillis() before and after
         //the generate function and will return the time that it took
-        long timeBefore = System.currentTimeMillis();
-        generate(rows,columns);
-        long timeAfter = System.currentTimeMillis();
-        long totalTime = timeAfter - timeBefore;
-        return totalTime;
+        if(rows>0 && columns>0){
+            long timeBefore = System.currentTimeMillis();
+            generate(rows,columns);
+            long timeAfter = System.currentTimeMillis();
+            long totalTime = timeAfter - timeBefore;
+            return totalTime;
+        }
+        return -1;
+
     }
 
 }

@@ -3,7 +3,7 @@ package algorithms.mazeGenerators;
 import java.util.Random;
 
 public class Maze {
-    public int[][] MazeInfo;
+    protected int[][] MazeInfo;
     private int numOfRows;
     private int numOfColumns;
     private Position StartPosition;
@@ -11,53 +11,55 @@ public class Maze {
 
     /**
      *
-     * @param maze - the Copied maze in the copy Constructor;
+     * @param maze - a Copied maze in the copy Constructor;
      */
-    public Maze(Maze maze){//Copy Constructor
-        MazeInfo = new int[maze.numOfRows][maze.numOfColumns];
-        for (int i = 0; i < maze.numOfRows ; i++)
-        {
-            for (int j = 0; j < maze.numOfColumns; j++)
-            {
-                this.MazeInfo[i][j] = maze.MazeInfo[i][j];
+    public Maze(Maze maze) {//Copy Constructor
+        if (maze != null) {
+            MazeInfo = new int[maze.numOfRows][maze.numOfColumns];
+            for (int i = 0; i < maze.numOfRows; i++) {
+                for (int j = 0; j < maze.numOfColumns; j++) {
+                    this.MazeInfo[i][j] = maze.MazeInfo[i][j];
+                }
             }
+            this.numOfColumns = maze.numOfColumns;
+            this.numOfRows = maze.numOfRows;
+            this.StartPosition = new Position(maze.StartPosition.getRowIndex(), maze.StartPosition.getColumnIndex());
+            this.GoalPosition = new Position(maze.GoalPosition.getRowIndex(), maze.GoalPosition.getColumnIndex());
         }
-        this.numOfColumns = maze.numOfColumns;
-        this.numOfRows = maze.numOfRows;
-        this.StartPosition = new Position(maze.StartPosition.getRowIndex(),maze.StartPosition.getColumnIndex());
-        this.GoalPosition = new Position(maze.GoalPosition.getRowIndex(),maze.GoalPosition.getColumnIndex());
     }
-
     /**
      *
      * @param numOfRows - number of rows
      * @param numOfColumns - number of columns
      */
     public Maze(int numOfRows, int numOfColumns) {
-        this.numOfRows = numOfRows;
-        this.numOfColumns = numOfColumns;
-        MazeInfo = new int[numOfRows][numOfColumns];
+        if (numOfColumns > 0 && numOfRows > 0) {
+            this.numOfRows = numOfRows;
+            this.numOfColumns = numOfColumns;
+            MazeInfo = new int[numOfRows][numOfColumns];
+        }
     }
-
     /**
      *
      * @param row - specified row
-     * @param column - specified columns
+     * @param column - specified column
      * @return - value in the specified cell
      */
     public int getMazeInfo(int row,int column){
-        return MazeInfo[row][column];
+        if(row>=0 && column >= 0)
+            return MazeInfo[row][column];
+        return -1;
     }
 
     /**
      *
      * @param row - specified row
-     * @param column - specified columns
+     * @param column - specified column
      * @param data - value to set in the specified cell
      */
     public void setMazeInfo(int row,int column,int data){
         if(row < numOfRows && row >=0 && column < numOfColumns && column >= 0)
-        MazeInfo[row][column] = data;
+            MazeInfo[row][column] = data;
     }
 
     /**
@@ -81,7 +83,9 @@ public class Maze {
      * @return - the Starting Cell of the maze
      */
     public Position getStartPosition() {
-        return StartPosition;
+        if(StartPosition != null)
+            return StartPosition;
+        return null;
     }
 
     /**
@@ -89,7 +93,8 @@ public class Maze {
      * @param startPosition - set a new starting cell
      */
     public void setStartPosition(Position startPosition) {
-        StartPosition = startPosition;
+        if(startPosition != null)
+            StartPosition = startPosition;
     }
 
     /**
@@ -97,7 +102,8 @@ public class Maze {
      * @param goalPosition - set a new goal cell
      */
     public void setGoalPosition(Position goalPosition) {
-        GoalPosition = goalPosition;
+        if(goalPosition != null)
+            GoalPosition = goalPosition;
     }
 
     /**
@@ -105,7 +111,9 @@ public class Maze {
      * @return - the Goal Cell of the maze
      */
     public Position getGoalPosition() {
-        return GoalPosition;
+        if(GoalPosition != null)
+            return GoalPosition;
+        return null;
     }
 
     /**
@@ -130,24 +138,7 @@ public class Maze {
     }
 
     /**
-     * prints maze wothout solutions
-     */
-    public void CleanPrint () {
-        for (int i = 0; i < numOfRows; i++) {
-            for (int j = 0; j < numOfColumns; j++) {
-                if (i == StartPosition.getRowIndex() && j == StartPosition.getColumnIndex()) {//startPosition
-                    System.out.print(" " + "\u001B[44m" + " ");
-                } else if (i == GoalPosition.getRowIndex() && j == GoalPosition.getColumnIndex()) {//goalPosition
-                    System.out.print(" " + "\u001B[44m" + " ");
-                } else if (MazeInfo[i][j] == 1) {System.out.print(" " + "\u001B[45m" + " ");}
-                else System.out.print(" " + "\u001B[107m" + " ");
-            }
-            System.out.println(" " + "\u001B[107m");
-        }
-    }
-
-    /**
-     * generate randomly start Cell and Goal Cell
+     * generates random start Cell and Goal Cell
      */
     public void GenerateStartAndEndPoints () {
         boolean GoodDistance = false;

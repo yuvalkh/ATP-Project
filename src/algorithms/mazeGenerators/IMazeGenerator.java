@@ -13,7 +13,7 @@ public interface IMazeGenerator {
      *
      * @param rows - number of rows in the maze
      * @param columns -number of columns in the maze
-     * @return- the time that taken to create a maze
+     * @return- the time that was taken to create the maze
      */
     long measureAlgorithmTimeMillis(int rows,int columns);
 }
