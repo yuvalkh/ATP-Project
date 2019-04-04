@@ -13,6 +13,7 @@ public class MyMazeGenerator extends AMazeGenerator {
      * @param columns -number of columns in the maze
      * @return a generated Maze by Prim's Algorithm.
      */
+
     @Override
     public Maze generate(int rows, int columns) {
         //make a maze by Prim/Kruskal/DFS/Recursive algorithm
