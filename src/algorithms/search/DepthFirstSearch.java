@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm {
     private int NumberOfNodesEvaluated = 0;
-//.
+//..
     @Override
     public Solution solve(ISearchable s) {
         if (s != null) {
