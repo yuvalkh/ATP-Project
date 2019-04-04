@@ -115,6 +115,19 @@ public class Maze {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
                 if (i == StartPosition.getRowIndex() && j == StartPosition.getColumnIndex()) {//startPosition
+                    System.out.print("S ");
+                } else if (i == GoalPosition.getRowIndex() && j == GoalPosition.getColumnIndex()) {//goalPosition
+                    System.out.print("E ");
+                } else
+                    System.out.print(MazeInfo[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    /*public void print() {
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                if (i == StartPosition.getRowIndex() && j == StartPosition.getColumnIndex()) {//startPosition
                     System.out.print(" " + "\u001B[44m" + " ");
                 } else if (i == GoalPosition.getRowIndex() && j == GoalPosition.getColumnIndex()) {//goalPosition
                     System.out.print(" " + "\u001B[44m" + " ");
@@ -130,7 +143,7 @@ public class Maze {
             }
             System.out.println(" " + "\u001B[107m");
         }
-    }
+    }*/
 
     /**
      * generates random start Cell and Goal Cell

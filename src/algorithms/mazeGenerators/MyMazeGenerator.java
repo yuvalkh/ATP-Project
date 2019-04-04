@@ -37,6 +37,13 @@ public class MyMazeGenerator extends AMazeGenerator {
                     addNeighbors(neighbors, temp, MyMaze);
                 }
             }
+            ////////////////changing all the 8 to 0 to have only 1 or 0
+            for (int i = 0; i < MyMaze.getNumOfRows(); i++) {
+                for (int j = 0; j < MyMaze.getNumOfColumns(); j++) {
+                    if(MyMaze.getMazeInfo(i,j) == 8)
+                        MyMaze.setMazeInfo(i,j,0);
+                }
+            }
             return MyMaze;
         }
         return null;
