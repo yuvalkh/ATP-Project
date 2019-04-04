@@ -80,6 +80,19 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
     }
+    public void CleanPrint () {
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                if (i == StartPosition.getRowIndex() && j == StartPosition.getColumnIndex()) {//startPosition
+                    System.out.print(" " + "\u001B[44m" + " ");
+                } else if (i == GoalPosition.getRowIndex() && j == GoalPosition.getColumnIndex()) {//goalPosition
+                    System.out.print(" " + "\u001B[44m" + " ");
+                } else if (MazeInfo[i][j] == 1) {System.out.print(" " + "\u001B[45m" + " ");}
+                else System.out.print(" " + "\u001B[107m" + " ");
+            }
+            System.out.println(" " + "\u001B[107m");
+        }
+    }
 
     public void GenerateStartAndEndPoints () {
         boolean GoodDistance = false;
@@ -115,7 +128,7 @@ public class Maze {
         int y2 = b.getColumnIndex();
 
         double distance = Math.sqrt( Math.pow( (x2-x1) ,2) + Math.pow( (y2-y1) ,2) );
-        double Minimum = (numOfColumns + numOfRows)/2;
+        double Minimum = (numOfColumns + numOfRows)/1.5;
 
         if (distance > Minimum){
             return true;
