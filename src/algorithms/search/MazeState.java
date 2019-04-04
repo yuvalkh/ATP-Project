@@ -2,6 +2,8 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Position;
 
+import java.util.Objects;
+
 public class MazeState extends AState {
     private Position currentPosition;
 
@@ -14,6 +16,11 @@ public class MazeState extends AState {
     public MazeState(int row, int column,MazeState from) {
         super(row + "," + column,from,0);
         currentPosition = new Position(row,column);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentPosition.getRowIndex(),currentPosition.getColumnIndex());
     }
 
     /**

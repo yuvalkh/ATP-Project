@@ -2,11 +2,7 @@ package algorithms.search;
 
 
 import javax.swing.plaf.nimbus.State;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
     private int NumberOfNodesEvaluated = 0;
@@ -18,7 +14,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
      */
     @Override
     public Solution solve(ISearchable s) {
-        ArrayList<AState> discoveredStates = new ArrayList<>();
+        HashSet<AState> discoveredStates = new HashSet<>();
+        //ArrayList<AState> discoveredStates = new ArrayList<>();
         PriorityQueue<AState> priorityQ;
         Solution sol = new Solution();
         ArrayList<AState> list = new ArrayList<>();

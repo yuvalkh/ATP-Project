@@ -1,6 +1,7 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm {
@@ -9,8 +10,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     @Override
     public Solution solve(ISearchable s) {
         if (s != null) {
-
-            ArrayList<AState> discovered = new ArrayList<>();
+            HashSet<AState> discovered = new HashSet<>();
+            //ArrayList<AState> discovered = new ArrayList<>();
             Solution sol = new Solution();
             AState goal = s.getGoalState();
             AState temp = goal;
