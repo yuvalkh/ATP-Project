@@ -3,7 +3,7 @@ package algorithms.mazeGenerators;
 import java.util.Random;
 
 public class Maze {
-    public int[][] MazeInfo;
+    protected int[][] MazeInfo;
     private int numOfRows;
     private int numOfColumns;
     private Position StartPosition;
@@ -128,7 +128,7 @@ public class Maze {
         int y2 = b.getColumnIndex();
 
         double distance = Math.sqrt( Math.pow( (x2-x1) ,2) + Math.pow( (y2-y1) ,2) );
-        double Minimum = (numOfColumns + numOfRows)/1.5;
+        double Minimum = ((double)numOfColumns + numOfRows)/2;
 
         if (distance > Minimum){
             return true;
