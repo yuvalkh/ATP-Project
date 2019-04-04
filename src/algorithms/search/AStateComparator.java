@@ -3,6 +3,12 @@ package algorithms.search;
 import java.util.Comparator;
 
 public class AStateComparator implements Comparator {
+    /**
+     *
+     * @param o1
+     * @param o2
+     * @return
+     */
     @Override
     public int compare(Object o1, Object o2) {
         if(o1 instanceof AState && o2 instanceof AState) {

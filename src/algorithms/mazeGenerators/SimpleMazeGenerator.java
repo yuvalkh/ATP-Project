@@ -1,15 +1,12 @@
 package algorithms.mazeGenerators;
 
+
+
 import java.util.Random;
 
 public class SimpleMazeGenerator extends AMazeGenerator {
-    /**
-     *
-     * @param rows - number of rows in the maze
-     * @param columns -number of columns in the maze
-     * @return a maze that was made randomly
-     */
     @Override
+    @SuppressWarnings("Duplicates")
     public Maze generate(int rows, int columns) {
         //the idea is to generate random solution that will go straight to the goal and then generate random walls
         Random rand = new Random();
@@ -79,6 +76,8 @@ public class SimpleMazeGenerator extends AMazeGenerator {
                 }
             }
         }
+
+        //right now we can be OR in the end OR in the last row OR in the last column.
 
         if(currentRow < goalRow){//we can still go down
             while(currentRow != goalRow){
