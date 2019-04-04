@@ -8,8 +8,12 @@ public class Solution {
     public Solution() {
         Solve = new ArrayList<>();
     }
-    public void addState(AState state){
+
+    public void addState(AState state) {
         Solve.add(state);
     }
-    public ArrayList<AState> getSolutionPath(){ return Solve; }
+
+    public ArrayList<AState> getSolutionPath() {
+        return Solve;
+    }
 }
