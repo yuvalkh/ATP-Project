@@ -9,6 +9,10 @@ public class Maze {
     private Position StartPosition;
     private Position GoalPosition;
 
+    /**
+     *
+     * @param maze - the Copied maze in the copy Constructor;
+     */
     public Maze(Maze maze){//Copy Constructor
         MazeInfo = new int[maze.numOfRows][maze.numOfColumns];
         for (int i = 0; i < maze.numOfRows ; i++)
@@ -24,45 +28,89 @@ public class Maze {
         this.GoalPosition = new Position(maze.GoalPosition.getRowIndex(),maze.GoalPosition.getColumnIndex());
     }
 
+    /**
+     *
+     * @param numOfRows - number of rows
+     * @param numOfColumns - number of columns
+     */
     public Maze(int numOfRows, int numOfColumns) {
         this.numOfRows = numOfRows;
         this.numOfColumns = numOfColumns;
         MazeInfo = new int[numOfRows][numOfColumns];
     }
 
+    /**
+     *
+     * @param row - specified row
+     * @param column - specified columns
+     * @return - value in the specified cell
+     */
     public int getMazeInfo(int row,int column){
         return MazeInfo[row][column];
     }
 
+    /**
+     *
+     * @param row - specified row
+     * @param column - specified columns
+     * @param data - value to set in the specified cell
+     */
     public void setMazeInfo(int row,int column,int data){
         if(row < numOfRows && row >=0 && column < numOfColumns && column >= 0)
         MazeInfo[row][column] = data;
     }
 
+    /**
+     *
+     * @return - number of rows
+     */
     public int getNumOfRows() {
         return numOfRows;
     }
 
+    /**
+     *
+     * @return - number of columns
+     */
     public int getNumOfColumns() {
         return numOfColumns;
     }
 
+    /**
+     *
+     * @return - the Starting Cell of the maze
+     */
     public Position getStartPosition() {
         return StartPosition;
     }
 
+    /**
+     *
+     * @param startPosition - set a new starting cell
+     */
     public void setStartPosition(Position startPosition) {
         StartPosition = startPosition;
     }
 
+    /**
+     *
+     * @param goalPosition - set a new goal cell
+     */
     public void setGoalPosition(Position goalPosition) {
         GoalPosition = goalPosition;
     }
 
+    /**
+     *
+     * @return - the Goal Cell of the maze
+     */
     public Position getGoalPosition() {
         return GoalPosition;
     }
 
+    /**
+     * prints maze with solutions
+     */
     public void print () {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -80,6 +128,10 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
     }
+
+    /**
+     * prints maze wothout solutions
+     */
     public void CleanPrint () {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -94,6 +146,9 @@ public class Maze {
         }
     }
 
+    /**
+     * generate randomly start Cell and Goal Cell
+     */
     public void GenerateStartAndEndPoints () {
         boolean GoodDistance = false;
         while (!GoodDistance)
@@ -116,11 +171,20 @@ public class Maze {
                     goal.setRowIndex(random.nextInt(this.numOfRows));
                 }
                 setGoalPosition(goal);
-                GoodDistance = Distance(start,goal,this.numOfColumns,this.numOfRows);
+                GoodDistance = Distance(start,goal);
             }
         }
     }
-    private boolean Distance (Position a, Position b , int numOfColumns , int numOfRows) {
+
+    /**
+     *
+     * @param a - cell
+     * @param b - cell
+     * @return - checks if the distance between 2 cells is Far enough
+     * we will use it usually to check if the start Position is far enough from the goal position
+     * to make the maze a bit more interesting.
+     */
+    private boolean Distance (Position a, Position b) {
 
         int x1 = a.getRowIndex();
         int y1 = a.getColumnIndex();
@@ -128,7 +192,7 @@ public class Maze {
         int y2 = b.getColumnIndex();
 
         double distance = Math.sqrt( Math.pow( (x2-x1) ,2) + Math.pow( (y2-y1) ,2) );
-        double Minimum = (numOfColumns + numOfRows)/1.5;
+        double Minimum = (this.numOfColumns + this.numOfRows)/2;
 
         if (distance > Minimum){
             return true;

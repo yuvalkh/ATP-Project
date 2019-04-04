@@ -6,6 +6,12 @@ public abstract class  AMazeGenerator implements IMazeGenerator{
     //
     //}
 
+    /**
+     *
+     * @param rows - number of rows in the maze
+     * @param columns -number of columns in the maze
+     * @return- the output maze
+     */
     @Override
     public long measureAlgorithmTimeMillis(int rows, int columns) {
         //will run System.currentTimeMillis() before and after

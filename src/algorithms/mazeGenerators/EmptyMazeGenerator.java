@@ -2,6 +2,12 @@ package algorithms.mazeGenerators;
 
 public class EmptyMazeGenerator extends AMazeGenerator {
 
+    /**
+     *
+     * @param rows - number of rows in the maze
+     * @param columns -number of columns in the maze
+     * @return - the output maze
+     */
     @Override
     public Maze generate(int rows, int columns) {
         //will return an empty maze without any walls

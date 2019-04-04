@@ -7,6 +7,12 @@ import java.util.Random;
 public class MyMazeGenerator extends AMazeGenerator {
     private LinkedList <Position> neighbors = new LinkedList<>();
 
+    /**
+     *
+     * @param rows - number of rows in the maze
+     * @param columns -number of columns in the maze
+     * @return a generated Maze by Prim's Algorithm.
+     */
     @Override
     public Maze generate(int rows, int columns) {
         //make a maze by Prim/Kruskal/DFS/Recursive algorithm
@@ -38,6 +44,11 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
     //private boolean DFSMaze()
 
+    /**
+     *
+     * @param MyMaze - makes MyMaze's MazeInfo a Net which means every cell has 4 blocks surrounding it.
+     *               i necessary condition in order to use Prim's Algorithm
+     */
     private void MakeNet(Maze MyMaze) { //Make a Net
         Random random = new Random();
         int randomWallIndex1 = random.nextInt(2);
@@ -57,6 +68,12 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
     //sign GoalPoint as part of the maze, info[i][j] = 8
 
+    /**
+     *
+     * @param neighbors - list of Positions (Cells)
+     * @param temp - a Cell. We will need to find it's neighbors
+     * @param MyMaze - Maze.
+     */
     private void addNeighbors(List<Position> neighbors, Position temp ,Maze MyMaze){
         if(temp.getColumnIndex() < MyMaze.getNumOfColumns() && temp.getRowIndex()<MyMaze.getNumOfRows())
         {
