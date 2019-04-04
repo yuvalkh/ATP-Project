@@ -92,28 +92,30 @@ public class MyMazeGenerator extends AMazeGenerator {
         int ARow=a.getRowIndex();
         int ACol=a.getColumnIndex();
         boolean broke = false;
+        //boolean Anotherbroke = false;
         Random randomBreake = new Random();
+        int AnotherBreak = randomBreake.nextInt(30);
         while(!broke)
         {
             int random = randomBreake.nextInt(4);
-            if(random == 0)
+            if(random == 0 || AnotherBreak == 0)
             {
                 if(ACol -2 >=0)
                 {
-                    if(!broke)
-                    {
+                   // if(!broke )
+                    //{
                         if( MyMaze.getMazeInfo(ARow,ACol-2) == 8 )
                         {
                             MyMaze.setMazeInfo(ARow,ACol-1, 8);
                             broke = true;
                         }
-                    }
+                    //}
                 }
             }
-            if(random == 1 )
+            if(random == 1 || AnotherBreak == 1)
             {
-                if(!broke)
-                {
+                //if(!broke)
+               // {
                     if(ACol +2 < MyMaze.getNumOfColumns())
                     {
                         if( MyMaze.getMazeInfo(ARow,ACol+2) == 8 )
@@ -122,12 +124,12 @@ public class MyMazeGenerator extends AMazeGenerator {
                             broke = true;
                         }
                     }
-                }
+                //}
             }
-            if(random ==2 )
+            if(random == 2 || AnotherBreak == 2)
             {
-                if(!broke)
-                {
+               // if(!broke)
+                //{
                     if(ARow - 2 >= 0)
                     {
                         if( MyMaze.getMazeInfo(ARow-2,ACol) == 8 )
@@ -136,12 +138,12 @@ public class MyMazeGenerator extends AMazeGenerator {
                             broke = true;
                         }
                     }
-                }
+                //}
             }
-            if(random == 3)
+            if(random == 3 || AnotherBreak == 3)
             {
-                if(!broke)
-                {
+               // if(!broke)
+                //{
                     if(ARow + 2 < MyMaze.getNumOfRows())
                     {
                         if( MyMaze.getMazeInfo(ARow+2,ACol) == 8 )
@@ -150,7 +152,7 @@ public class MyMazeGenerator extends AMazeGenerator {
                             broke = true;
                         }
                     }
-                }
+                //}
             }
         }
 

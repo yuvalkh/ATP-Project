@@ -82,28 +82,44 @@ public class Maze {
     }
 
     public void GenerateStartAndEndPoints () {
-        if (numOfRows != 0 && numOfColumns != 0) {
+        boolean GoodDistance = false;
+        while (!GoodDistance)
+        {
+            if (numOfRows != 0 && numOfColumns != 0) {
+                Random random = new Random();
+                /*Make new StartPosition*/
+                Position start = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
+                while (this.MazeInfo[start.getRowIndex()][start.getColumnIndex()] == 1){
+                    start.setRowIndex(random.nextInt(this.numOfRows));
+                    start.setColumnIndex(random.nextInt(this.numOfColumns));
+                }
+                setStartPosition(start);
 
-            Random random = new Random();
-
-            /*Make new StartPosition*/
-            Position start = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
-            while (this.MazeInfo[start.getRowIndex()][start.getColumnIndex()] == 1){
-                start.setRowIndex(random.nextInt(this.numOfRows));
-                start.setColumnIndex(random.nextInt(this.numOfColumns));
+                /*Make new GoalPosition*/
+                Position goal = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
+                //goal.getColumnIndex()!= start.getColumnIndex() && goal.getRowIndex() != start.getRowIndex() &&
+                while (this.MazeInfo[goal.getRowIndex()][goal.getColumnIndex()] == 1){
+                    goal.setColumnIndex(random.nextInt(this.numOfColumns));
+                    goal.setRowIndex(random.nextInt(this.numOfRows));
+                }
+                setGoalPosition(goal);
+                GoodDistance = Distance(start,goal,this.numOfColumns,this.numOfRows);
             }
-            setStartPosition(start);
-            System.out.println( "start index  = " + getMazeInfo(start.getRowIndex(),start.getColumnIndex()));
-
-            /*Make new GoalPosition*/
-            Position goal = new Position(random.nextInt(this.numOfRows),random.nextInt(this.numOfColumns));
-            //goal.getColumnIndex()!= start.getColumnIndex() && goal.getRowIndex() != start.getRowIndex() &&
-            while (this.MazeInfo[goal.getRowIndex()][goal.getColumnIndex()] == 1){
-                goal.setColumnIndex(random.nextInt(this.numOfColumns));
-                goal.setRowIndex(random.nextInt(this.numOfRows));
-            }
-            setGoalPosition(goal);
-            System.out.println( "goal index  = " + getMazeInfo(goal.getRowIndex(),goal.getColumnIndex()));
         }
+    }
+    private boolean Distance (Position a, Position b , int numOfColumns , int numOfRows) {
+
+        int x1 = a.getRowIndex();
+        int y1 = a.getColumnIndex();
+        int x2 = b.getRowIndex();
+        int y2 = b.getColumnIndex();
+
+        double distance = Math.sqrt( Math.pow( (x2-x1) ,2) + Math.pow( (y2-y1) ,2) );
+        double Minimum = (numOfColumns + numOfRows)/2;
+
+        if (distance > Minimum){
+            return true;
+        }
+        return false;
     }
 }
