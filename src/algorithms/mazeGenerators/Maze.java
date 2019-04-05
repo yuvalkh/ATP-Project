@@ -36,6 +36,7 @@ public class Maze {
             this.numOfRows = numOfRows;
             this.numOfColumns = numOfColumns;
             MazeInfo = new int[numOfRows][numOfColumns];
+            GenerateStartAndEndPoints();
         }
     }
 
@@ -124,7 +125,8 @@ public class Maze {
             System.out.println();
         }
     }
-    /*public void print() {
+    /*
+    public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
                 if (i == StartPosition.getRowIndex() && j == StartPosition.getColumnIndex()) {//startPosition

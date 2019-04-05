@@ -14,42 +14,45 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
      */
     @Override
     public Solution solve(ISearchable s) {
-        HashSet<AState> discoveredStates = new HashSet<>();
-        //ArrayList<AState> discoveredStates = new ArrayList<>();
-        PriorityQueue<AState> priorityQ;
-        Solution sol = new Solution();
-        ArrayList<AState> list = new ArrayList<>();
-        AStateComparator compar = new AStateComparator();
-        priorityQ = new PriorityQueue<>(compar);
-        AState start = s.getStartState();
-        AState goal = s.getGoalState();
-        Goal = goal;
-        AState temp = null;
-        priorityQ.add(start);
-        while (!priorityQ.isEmpty()) {
-            temp = priorityQ.remove();
-            if (goal.equals(temp)) {
-                break;
-            } else {
-                for (AState adjState : s.getAllSuccessors(temp)) {
-                    if (!discoveredStates.contains(adjState)) {
-                        discoveredStates.add(adjState);
-                        giveCost(adjState);
-                        adjState.setCameFrom(temp);
-                        priorityQ.add(adjState);
-                        NumberOfNodesEvaluated++;
+        if(s != null) {
+            HashSet<AState> discoveredStates = new HashSet<>();
+            //ArrayList<AState> discoveredStates = new ArrayList<>();
+            PriorityQueue<AState> priorityQ;
+            Solution sol = new Solution();
+            ArrayList<AState> list = new ArrayList<>();
+            AStateComparator compar = new AStateComparator();
+            priorityQ = new PriorityQueue<>(compar);
+            AState start = s.getStartState();
+            AState goal = s.getGoalState();
+            Goal = goal;
+            AState temp = null;
+            priorityQ.add(start);
+            while (!priorityQ.isEmpty()) {
+                temp = priorityQ.remove();
+                if (goal.equals(temp)) {
+                    break;
+                } else {
+                    for (AState adjState : s.getAllSuccessors(temp)) {
+                        if (!discoveredStates.contains(adjState)) {
+                            discoveredStates.add(adjState);
+                            giveCost(adjState);
+                            adjState.setCameFrom(temp);
+                            priorityQ.add(adjState);
+                            NumberOfNodesEvaluated++;
+                        }
                     }
                 }
             }
+            //now we run on the solution to get a list from start to the end
+            for (AState state = temp; state != null; state = state.getCameFrom()) {
+                list.add(state);
+            }
+            for (int i = list.size() - 1; i >= 0; i--) {
+                sol.addState(list.remove(i));
+            }
+            return sol;
         }
-        //now we run on the solution to get a list from start to the end
-        for (AState state = temp; state != null; state = state.getCameFrom()) {
-            list.add(state);
-        }
-        for (int i = list.size() - 1; i >= 0; i--) {
-            sol.addState(list.remove(i));
-        }
-        return sol;
+        return null;
     }
 
     /**

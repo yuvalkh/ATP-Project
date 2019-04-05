@@ -32,6 +32,7 @@ public class RunSearchOnMaze {
 
 /*
 package test;
+import JUnit.JUnitTestingBestFirstSearch;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
