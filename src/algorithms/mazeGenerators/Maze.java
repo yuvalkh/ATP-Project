@@ -191,7 +191,7 @@ public class Maze {
         int y2 = b.getColumnIndex();
 
         double distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
-        double Minimum = (this.numOfColumns + this.numOfRows) / 4;
+        double Minimum = (this.numOfColumns + this.numOfRows) / 7;
 
         if (distance >= Minimum) {
             return true;

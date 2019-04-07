@@ -40,26 +40,29 @@ public class JUnitTestingBestFirstSearch {
     }
 
     @Test
-    public void Test4(){
+    public void TestBestFSonMyMaze(){
         ISearchingAlgorithm bfs = new BestFirstSearch();
-        ISearchable maze;
+        IMazeGenerator mg = new MyMazeGenerator();
+        Maze maze;
+        SearchableMaze searchableMaze;
         ArrayList<AState> solutionPath;
         for (int i = 1; i <= 10; i += 1) {
             for (int j = 1; j < 10; j++) {
-                maze = new SearchableMaze(i, i);
-                Solution solution = bfs.solve(maze);
-                ((SearchableMaze) maze).print();
+                maze = mg.generate(i, j);
+                searchableMaze = new SearchableMaze(maze);
+                Solution solution = bfs.solve(searchableMaze);
+                searchableMaze.print();
+                System.out.println();
                 solutionPath = solution.getSolutionPath();
                 for (int k = 0; k < solutionPath.size(); k++) {
-                    ((SearchableMaze) maze).setMazeInfo(((MazeState) solutionPath.get(k)).getCurrentPosition().getRowIndex(), ((MazeState) solutionPath.get(k)).getCurrentPosition().getColumnIndex(), 4);
+                    searchableMaze.setMazeInfo(((MazeState) solutionPath.get(k)).getCurrentPosition().getRowIndex(), ((MazeState) solutionPath.get(k)).getCurrentPosition().getColumnIndex(), 4);
                 }
-                ((SearchableMaze) maze).print();
+                searchableMaze.print();
                 for (int k = 0; k < solutionPath.size(); k++) {
                     System.out.println(String.format("%s.  %s", k, solutionPath.get(k)));
                 }
                 System.out.println();
             }
-
         }
     }
 }
