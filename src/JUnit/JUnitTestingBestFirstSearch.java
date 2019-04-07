@@ -17,8 +17,9 @@ public class JUnitTestingBestFirstSearch {
     @Test
     public void Test2() {//test the implement for several mazes
         ISearchingAlgorithm bfs = new BestFirstSearch();
+        ISearchable maze;
         for (int i = 10; i <= 100; i += 10) {
-            ISearchable maze = new SearchableMaze(i, i);
+            maze = new SearchableMaze(i, i);
             Solution solution = bfs.solve(maze);
             ((SearchableMaze) maze).print();
             ArrayList<AState> solutionPath = solution.getSolutionPath();
@@ -36,5 +37,29 @@ public class JUnitTestingBestFirstSearch {
     public boolean Test3() {
         ISearchingAlgorithm bfs = new BestFirstSearch();
         return bfs.getName().equals("Best First Search");
+    }
+
+    @Test
+    public void Test4(){
+        ISearchingAlgorithm bfs = new BestFirstSearch();
+        ISearchable maze;
+        ArrayList<AState> solutionPath;
+        for (int i = 1; i <= 10; i += 1) {
+            for (int j = 1; j < 10; j++) {
+                maze = new SearchableMaze(i, i);
+                Solution solution = bfs.solve(maze);
+                ((SearchableMaze) maze).print();
+                solutionPath = solution.getSolutionPath();
+                for (int k = 0; k < solutionPath.size(); k++) {
+                    ((SearchableMaze) maze).setMazeInfo(((MazeState) solutionPath.get(k)).getCurrentPosition().getRowIndex(), ((MazeState) solutionPath.get(k)).getCurrentPosition().getColumnIndex(), 4);
+                }
+                ((SearchableMaze) maze).print();
+                for (int k = 0; k < solutionPath.size(); k++) {
+                    System.out.println(String.format("%s.  %s", k, solutionPath.get(k)));
+                }
+                System.out.println();
+            }
+
+        }
     }
 }
