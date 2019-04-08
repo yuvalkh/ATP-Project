@@ -112,6 +112,7 @@ public class Maze {
     /**
      * prints maze with solutions
      */
+
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -125,7 +126,8 @@ public class Maze {
             System.out.println();
         }
     }
-    /*
+
+/*
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -146,7 +148,7 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
     }
-    */
+*/
     /**
      * generates random start Cell and Goal Cell
      */
