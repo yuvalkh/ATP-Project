@@ -126,8 +126,8 @@ public class Maze {
             System.out.println();
         }
     }
-
 /*
+
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {

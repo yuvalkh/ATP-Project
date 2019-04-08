@@ -39,6 +39,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return null;
     }
 
+
     @Override
     public String getName() {
         return "DepthFirstSearch";
