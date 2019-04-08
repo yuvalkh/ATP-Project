@@ -146,7 +146,7 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
     }
-*/
+    */
     /**
      * generates random start Cell and Goal Cell
      */

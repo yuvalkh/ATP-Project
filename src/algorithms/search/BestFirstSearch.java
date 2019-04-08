@@ -1,19 +1,14 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class BestFirstSearch extends BreadthFirstSearch {
 
-    /*@Override
-    public Solution solve(ISearchable s) {
-        Solution withCrosses = super.solve(s);
-        ArrayList<AState> Final = withCrosses.getSolutionPath();
-        for (int i=0; i < withCrosses.getSolutionPath().size(); i++) {
-            if(((MazeState)Final.get(i)).getCurrentPosition().getRowIndex())
-        }
-
-        return withCrosses;
-    }*/
+    public BestFirstSearch() {
+        AStateComparator compar = new AStateComparator();
+        priorityQ = new PriorityQueue(compar);
+    }
 
     /**
      * @return the name of the Algorithm

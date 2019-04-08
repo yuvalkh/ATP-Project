@@ -3,6 +3,7 @@ package JUnit;
 import algorithms.search.*;
 import algorithms.mazeGenerators.*;
 import org.junit.jupiter.api.Test;
+import sun.font.CreatedFontTracker;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,31 @@ public class JUnitTestingBestFirstSearch {
                 }
                 System.out.println();
             }
+        }
+    }
+
+    @Test
+    public void testBestFS(){
+        ArrayList<AState> solutionPath;
+        IMazeGenerator mg = new EmptyMazeGenerator();
+        ISearchingAlgorithm bfs = new BestFirstSearch();
+        Maze maze = mg.generate(10,10);
+        maze.setStartPosition(new Position(0,0));
+        maze.setGoalPosition(new Position(9,9));
+        for (int i = 1; i < 10; i++) {
+            maze.setMazeInfo(i,0,1);
+            maze.setMazeInfo(i,2,1);
+        }
+        SearchableMaze searchableMaze = new SearchableMaze(maze);
+        bfs.solve(searchableMaze);
+        Solution solution = bfs.solve(searchableMaze);
+        solutionPath = solution.getSolutionPath();
+        for (int k = 0; k < solutionPath.size(); k++) {
+            searchableMaze.setMazeInfo(((MazeState) solutionPath.get(k)).getCurrentPosition().getRowIndex(), ((MazeState) solutionPath.get(k)).getCurrentPosition().getColumnIndex(), 12);
+        }
+        searchableMaze.print();
+        for (int k = 0; k < solutionPath.size(); k++) {
+            System.out.println(String.format("%s.  %s", k, solutionPath.get(k)));
         }
     }
 }

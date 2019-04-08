@@ -1,12 +1,16 @@
 package algorithms.search;
 
-
-import javax.swing.plaf.nimbus.State;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
     private int NumberOfNodesEvaluated = 0;
-    AState Goal;
+    protected Queue<AState> priorityQ;
+    protected AState Goal;
+
+    public BreadthFirstSearch() {
+        priorityQ = new LinkedList();
+    }
 
     /**
      * @param s an object that we can search on him
@@ -17,16 +21,15 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         if(s != null) {
             HashSet<AState> discoveredStates = new HashSet<>();
             //ArrayList<AState> discoveredStates = new ArrayList<>();
-            PriorityQueue<AState> priorityQ;
             Solution sol = new Solution();
             ArrayList<AState> list = new ArrayList<>();
-            AStateComparator compar = new AStateComparator();
-            priorityQ = new PriorityQueue<>(compar);
             AState start = s.getStartState();
             AState goal = s.getGoalState();
             Goal = goal;
+            boolean Flag = false;
             AState temp = null;
             priorityQ.add(start);
+            discoveredStates.add(start);
             while (!priorityQ.isEmpty()) {
                 temp = priorityQ.remove();
                 if (goal.equals(temp)) {
@@ -39,8 +42,14 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                             adjState.setCameFrom(temp);
                             priorityQ.add(adjState);
                             NumberOfNodesEvaluated++;
+                            if(goal.equals(adjState)){
+                                Flag = true;
+                                break;
+                            }
                         }
                     }
+                    if(Flag)
+                        break;
                 }
             }
             //now we run on the solution to get a list from start to the end
@@ -75,7 +84,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
      * @param state the state we want to give a cost to
      */
     protected void giveCost(AState state) {
-        return;
+        state.setCost(0);
     }
 
 }

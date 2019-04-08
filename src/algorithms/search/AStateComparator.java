@@ -14,7 +14,7 @@ public class AStateComparator implements Comparator {
             AState s1 = (AState) o1;
             AState s2 = (AState) o2;
             if (s1.getCost() < s2.getCost()) {
-                return 0;
+                return -1;
             } else if (s1.getCost() == s2.getCost()) {
                 return 0;
             } else {

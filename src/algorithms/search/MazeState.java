@@ -5,6 +5,7 @@ import algorithms.mazeGenerators.Position;
 import java.util.Objects;
 
 public class MazeState extends AState {
+    boolean isCross;
     private Position currentPosition;
 
     /**
@@ -13,9 +14,10 @@ public class MazeState extends AState {
      * @param column the column of the cell
      * @param from the maze state we came from
      */
-    public MazeState(int row, int column,MazeState from) {
+    public MazeState(int row, int column,MazeState from,boolean iscross) {
         super(row + "," + column,from,0);
         currentPosition = new Position(row,column);
+        isCross = iscross;
     }
 
     @Override
@@ -54,10 +56,13 @@ public class MazeState extends AState {
      */
     @Override
     public double getDistanceFromGoal(AState Goal) {
-        if(Goal instanceof MazeState)
-            return Math.sqrt(Math.pow(currentPosition.getColumnIndex() - ((MazeState) Goal).currentPosition.getColumnIndex(),2) + Math.pow(currentPosition.getRowIndex() - ((MazeState) Goal).currentPosition.getRowIndex(),2));
-        else
-            return -1;
+        if(Goal instanceof MazeState) {
+            if(isCross)
+                return Math.sqrt(Math.pow(currentPosition.getColumnIndex() - ((MazeState) Goal).currentPosition.getColumnIndex(), 2) + Math.pow(currentPosition.getRowIndex() - ((MazeState) Goal).currentPosition.getRowIndex(), 2)) * 2;
+            else
+                return Math.sqrt(Math.pow(currentPosition.getColumnIndex() - ((MazeState) Goal).currentPosition.getColumnIndex(), 2) + Math.pow(currentPosition.getRowIndex() - ((MazeState) Goal).currentPosition.getRowIndex(), 2));
+        }
+        else return -1;
     }
 
     /**

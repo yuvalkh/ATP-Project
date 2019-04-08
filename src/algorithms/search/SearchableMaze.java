@@ -29,7 +29,7 @@ public class SearchableMaze extends Maze implements ISearchable{
      */
     @Override
     public AState getStartState() {
-        return new MazeState(getStartPosition().getRowIndex(),getStartPosition().getColumnIndex(),null);
+        return new MazeState(getStartPosition().getRowIndex(),getStartPosition().getColumnIndex(),null,false);
     }
 
     /**
@@ -38,7 +38,7 @@ public class SearchableMaze extends Maze implements ISearchable{
      */
     @Override
     public AState getGoalState() {
-        return new MazeState(getGoalPosition().getRowIndex(),getGoalPosition().getColumnIndex(),null);
+        return new MazeState(getGoalPosition().getRowIndex(),getGoalPosition().getColumnIndex(),null,false);
     }
 
     /**
@@ -54,28 +54,29 @@ public class SearchableMaze extends Maze implements ISearchable{
         int CurrentRow = state.getCurrentPosition().getRowIndex();
         int CurrentColumn = state.getCurrentPosition().getColumnIndex();
         ArrayList<AState> Successors = new ArrayList<>();
-
-
         if(CurrentRow-1 >= 0 && CurrentColumn+1 < getNumOfColumns() && (MazeInfo[CurrentRow-1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn+1] == 0) && MazeInfo[CurrentRow-1][CurrentColumn+1] == 0 )//if top right is blank
-            Successors.add(new MazeState(CurrentRow-1,CurrentColumn+1,state));
+            Successors.add(new MazeState(CurrentRow-1,CurrentColumn+1,state,true));
 
         if(CurrentRow+1 < getNumOfRows() && CurrentColumn+1 < getNumOfColumns() && (MazeInfo[CurrentRow+1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn+1] == 0) && MazeInfo[CurrentRow+1][CurrentColumn+1] == 0 )//if top right is blank
-            Successors.add(new MazeState(CurrentRow+1,CurrentColumn+1,state));
+            Successors.add(new MazeState(CurrentRow+1,CurrentColumn+1,state,true));
 
         if(CurrentRow+1 < getNumOfRows() && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow+1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow+1][CurrentColumn-1] == 0 )//if top right is blank
-            Successors.add(new MazeState(CurrentRow+1,CurrentColumn-1,state));
+            Successors.add(new MazeState(CurrentRow+1,CurrentColumn-1,state,true));
 
         if(CurrentRow-1 >= 0 && CurrentColumn-1 >= 0 && (MazeInfo[CurrentRow-1][CurrentColumn] == 0 || MazeInfo[CurrentRow][CurrentColumn-1] == 0) && MazeInfo[CurrentRow-1][CurrentColumn-1] == 0 )//if top right is blank
-            Successors.add(new MazeState(CurrentRow-1,CurrentColumn-1,state));
+            Successors.add(new MazeState(CurrentRow-1,CurrentColumn-1,state,true));
 
         if(CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 0 || CurrentRow-1 >= 0 && MazeInfo[CurrentRow-1][CurrentColumn] == 8)//if up is blank
-            Successors.add(new MazeState(CurrentRow-1,CurrentColumn,state));
+            Successors.add(new MazeState(CurrentRow-1,CurrentColumn,state,false));
         if(CurrentColumn+1 < getNumOfColumns() && MazeInfo[CurrentRow][CurrentColumn+1] == 0 || CurrentColumn+1 < getNumOfColumns() && MazeInfo[CurrentRow][CurrentColumn+1] == 8)//if right is blank
-            Successors.add(new MazeState(CurrentRow,CurrentColumn+1,state));
+            Successors.add(new MazeState(CurrentRow,CurrentColumn+1,state,false));
         if(CurrentRow+1 < getNumOfRows() && MazeInfo[CurrentRow+1][CurrentColumn] == 0 || CurrentRow+1 < getNumOfRows() && MazeInfo[CurrentRow+1][CurrentColumn] == 8)//if down is blank
-            Successors.add(new MazeState(CurrentRow+1,CurrentColumn,state));
+            Successors.add(new MazeState(CurrentRow+1,CurrentColumn,state,false));
         if(CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 0 || CurrentColumn-1 >= 0 && MazeInfo[CurrentRow][CurrentColumn-1] == 8)//if left is blank
-            Successors.add(new MazeState(CurrentRow,CurrentColumn-1,state));
+            Successors.add(new MazeState(CurrentRow,CurrentColumn-1,state,false));
+
+
+
 
         return Successors;
     }

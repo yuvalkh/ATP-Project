@@ -33,7 +33,7 @@ public class RunSearchOnMaze {
 
 /*
 package test;
-import JUnit.JUnitTestingBestFirstSearch;
+
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
@@ -44,7 +44,7 @@ public class RunSearchOnMaze {
         IMazeGenerator mg = new MyMazeGenerator();
 
         long sTime=System.currentTimeMillis();
-        Maze maze = mg.generate(70, 70);
+        Maze maze = mg.generate(100, 100);
         System.out.println(System.currentTimeMillis()-sTime);
         System.out.println();
 
