@@ -211,29 +211,26 @@ public class Maze {
      * [goalRow/255][goalRow%255],[goalCol/255][goalCol%255],[0],[1],...,[1]
      */
     public byte[] toByteArray() {
-        ArrayList<Integer> info = new ArrayList<Integer>();
-        int OneStrike = 0, ZeroStrike = 0;
-        info.add(this.numOfRows / 255); //0
-        info.add(this.numOfRows % 255); //1
-        info.add(this.numOfColumns / 255); //2
-        info.add(this.numOfColumns % 255); //3
-        info.add(this.StartPosition.RowIndex / 255); //4
-        info.add(this.StartPosition.RowIndex % 255); //5
-        info.add(this.StartPosition.ColumnIndex / 255); //6
-        info.add(this.StartPosition.ColumnIndex % 255); //7
-        info.add(this.GoalPosition.RowIndex / 255); //8
-        info.add(this.GoalPosition.RowIndex % 255); //9
-        info.add(this.GoalPosition.ColumnIndex / 255); //10
-        info.add(this.GoalPosition.ColumnIndex % 255); //11
-        /**now we we'll find the number of 0's and 1's**/
+        byte[] byteinfo = new byte[12 + numOfRows * numOfColumns];
+        byteinfo[0] = (byte)(this.numOfRows / 256); //0
+        byteinfo[1] = (byte)(this.numOfRows % 256); //1
+        byteinfo[2] = (byte)(this.numOfColumns / 256); //2
+        byteinfo[3] = (byte)(this.numOfColumns % 256); //3
+        byteinfo[4] = (byte)(this.StartPosition.RowIndex / 256); //4
+        byteinfo[5] = (byte)(this.StartPosition.RowIndex % 256); //5
+        byteinfo[6] = (byte)(this.StartPosition.ColumnIndex / 256); //6
+        byteinfo[7] = (byte)(this.StartPosition.ColumnIndex % 256); //7
+        byteinfo[8] = (byte)(this.GoalPosition.RowIndex / 256); //8
+        byteinfo[9] = (byte)(this.GoalPosition.RowIndex % 256); //9
+        byteinfo[10] = (byte)(this.GoalPosition.ColumnIndex / 256); //10
+        byteinfo[11] = (byte)(this.GoalPosition.ColumnIndex % 256); //11
+        /**now we save the mazeInfo**/
+        int counter = 12;
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
-                info.add(getMazeInfo(i, j));
+                byteinfo[counter] = (byte)(getMazeInfo(i, j));
+                counter++;
             }
-        }
-        byte[] byteinfo = new byte[info.size()];
-        for (int i = 0; i < numOfRows; i++) {
-            byteinfo[i] = (info.get(i)).byteValue();
         }
         return byteinfo;
     }

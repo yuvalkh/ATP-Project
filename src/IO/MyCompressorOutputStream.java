@@ -30,13 +30,13 @@ public class MyCompressorOutputStream extends OutputStream {
         int zeroORone = 0;
         for (int i = 12; i < b.length; i++) {
             if(zeroORone == b[i] && list.get(list.size() - 1) < 255){//if it's the same as before and it can increment
-                list.set(list.size() - 1,list.get(list.size()) + 1);
+                list.set(list.size() - 1,list.get(list.size() - 1) + 1);
             }
             else if(zeroORone == b[i] && list.get(list.size() - 1) >= 255){//if it's the same as before but it cannot be incremented
                 list.add(0);
                 list.add(1);
             }
-            else if(zeroORone == b[i] && list.get(list.size() - 1) < 255){//if it's not the same as before
+            else if(zeroORone != b[i] && list.get(list.size() - 1) < 255){//if it's not the same as before
                 list.add(1);
                 if(zeroORone == 1){
                     zeroORone = 0;
