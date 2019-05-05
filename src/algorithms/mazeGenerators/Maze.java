@@ -112,7 +112,7 @@ public class Maze {
     /**
      * prints maze with solutions
      */
-
+/*
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -126,7 +126,8 @@ public class Maze {
             System.out.println();
         }
     }
-/*
+    */
+
 
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
@@ -148,7 +149,7 @@ public class Maze {
             System.out.println(" " + "\u001B[107m");
         }
     }
-*/
+
     /**
      * generates random start Cell and Goal Cell
      */
@@ -199,5 +200,23 @@ public class Maze {
             return true;
         }
         return false;
+    }
+
+    /**
+     *
+     * @return all the information of the maze(dimensions,walls/no walls
+     * entry and finish points).
+     */
+    public byte[] toByteArray(){
+        return null;
+    }
+
+    /**
+     *
+     * @param info the information(dimensions,walls/no walls
+     *entry and finish points) of the maze we want to build
+     */
+    public Maze(byte[] info){
+
     }
 }

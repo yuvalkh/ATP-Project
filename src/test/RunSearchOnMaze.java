@@ -1,4 +1,4 @@
-package test;
+/*package test;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
@@ -27,11 +27,11 @@ public class RunSearchOnMaze {
         }
     }
 }
+*/
 
 
 
 
-/*
 package test;
 
 import algorithms.mazeGenerators.IMazeGenerator;
@@ -77,4 +77,3 @@ public class RunSearchOnMaze {
 
     }
 }
-*/
