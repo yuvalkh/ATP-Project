@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+import javafx.geometry.Pos;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -211,18 +213,18 @@ public class Maze {
     public byte[] toByteArray() {
         ArrayList<Integer> info = new ArrayList<Integer>();
         int OneStrike = 0, ZeroStrike = 0;
-        info.add(this.numOfRows / 255);
-        info.add(this.numOfRows % 255);
-        info.add(this.numOfColumns / 255);
-        info.add(this.numOfColumns % 255);
-        info.add(this.StartPosition.RowIndex / 255);
-        info.add(this.StartPosition.RowIndex % 255);
-        info.add(this.StartPosition.ColumnIndex / 255);
-        info.add(this.StartPosition.ColumnIndex % 255);
-        info.add(this.GoalPosition.RowIndex / 255);
-        info.add(this.GoalPosition.RowIndex % 255);
-        info.add(this.GoalPosition.ColumnIndex / 255);
-        info.add(this.GoalPosition.ColumnIndex % 255);
+        info.add(this.numOfRows / 255); //0
+        info.add(this.numOfRows % 255); //1
+        info.add(this.numOfColumns / 255); //2
+        info.add(this.numOfColumns % 255); //3
+        info.add(this.StartPosition.RowIndex / 255); //4
+        info.add(this.StartPosition.RowIndex % 255); //5
+        info.add(this.StartPosition.ColumnIndex / 255); //6
+        info.add(this.StartPosition.ColumnIndex % 255); //7
+        info.add(this.GoalPosition.RowIndex / 255); //8
+        info.add(this.GoalPosition.RowIndex % 255); //9
+        info.add(this.GoalPosition.ColumnIndex / 255); //10
+        info.add(this.GoalPosition.ColumnIndex % 255); //11
         /**now we we'll find the number of 0's and 1's**/
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -242,6 +244,21 @@ public class Maze {
      *             entry and finish points) of the maze we want to build
      */
     public Maze(byte[] info) {
-
+        this.numOfRows = info[0] * 255 + info[1];
+        this.numOfColumns = info[2] * 255 + info[3];
+        this.MazeInfo = new int[numOfRows][numOfColumns];
+        Position startPos = new Position(info[4] * 255 + info[5], info[6] * 255 + info[7]);
+        Position GoalPos = new Position(info[8] * 255 + info[9], info[10] * 255 + info[11]);
+        setStartPosition(startPos);
+        setGoalPosition(GoalPos);
+        int CurrentCell = 12;
+        for (int row = 0; row < this.numOfRows; row++) {
+            for (int col = 0; col < numOfColumns; col++) {
+                if (CurrentCell < info.length) {
+                    setMazeInfo(row, col, info[CurrentCell]);
+                    CurrentCell++;
+                }
+            }
+        }
     }
 }
