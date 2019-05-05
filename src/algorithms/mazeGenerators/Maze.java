@@ -1,5 +1,7 @@
 package algorithms.mazeGenerators;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Maze {
@@ -127,8 +129,6 @@ public class Maze {
         }
     }
     */
-
-
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -203,20 +203,45 @@ public class Maze {
     }
 
     /**
-     *
      * @return all the information of the maze(dimensions,walls/no walls
      * entry and finish points).
+     * [numOfRows/255][numOfRows%255],[numOfColumns/255][numOfColumns%255],[startRow/255][startRow%255],[startCol/255] [startCol%255],
+     * [goalRow/255][goalRow%255],[goalCol/255][goalCol%255],[0],[1],...,[1]
      */
-    public byte[] toByteArray(){
-        return null;
+    public byte[] toByteArray() {
+        ArrayList<Integer> info = new ArrayList<Integer>();
+        int OneStrike = 0, ZeroStrike = 0;
+        info.add(this.numOfRows / 255);
+        info.add(this.numOfRows % 255);
+        info.add(this.numOfColumns / 255);
+        info.add(this.numOfColumns % 255);
+        info.add(this.StartPosition.RowIndex / 255);
+        info.add(this.StartPosition.RowIndex % 255);
+        info.add(this.StartPosition.ColumnIndex / 255);
+        info.add(this.StartPosition.ColumnIndex % 255);
+        info.add(this.GoalPosition.RowIndex / 255);
+        info.add(this.GoalPosition.RowIndex % 255);
+        info.add(this.GoalPosition.ColumnIndex / 255);
+        info.add(this.GoalPosition.ColumnIndex % 255);
+        /**now we we'll find the number of 0's and 1's**/
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < numOfColumns; j++) {
+                info.add(getMazeInfo(i, j));
+            }
+        }
+        byte[] byteinfo = new byte[info.size()];
+        for (int i = 0; i < numOfRows; i++) {
+            byteinfo[i] = (info.get(i)).byteValue();
+        }
+        return byteinfo;
     }
 
+
     /**
-     *
      * @param info the information(dimensions,walls/no walls
-     *entry and finish points) of the maze we want to build
+     *             entry and finish points) of the maze we want to build
      */
-    public Maze(byte[] info){
+    public Maze(byte[] info) {
 
     }
 }
