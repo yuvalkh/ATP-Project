@@ -2,9 +2,10 @@ package algorithms.search;
 
 import org.omg.CORBA.WrongTransactionHelper;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public abstract class AState {
+public abstract class AState implements Serializable {
     private AState cameFrom;
     private String stateName;
     private double cost;

@@ -3,10 +3,11 @@ package algorithms.mazeGenerators;
 import javafx.geometry.Pos;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Maze {
+public class Maze implements Serializable {
     protected int[][] MazeInfo;
     private int numOfRows;
     private int numOfColumns;
@@ -207,8 +208,8 @@ public class Maze {
     /**
      * @return all the information of the maze(dimensions,walls/no walls
      * entry and finish points).
-     * [numOfRows/255][numOfRows%255],[numOfColumns/255][numOfColumns%255],[startRow/255][startRow%255],[startCol/255] [startCol%255],
-     * [goalRow/255][goalRow%255],[goalCol/255][goalCol%255],[0],[1],...,[1]
+     * [numOfRows/256][numOfRows%256],[numOfColumns/256][numOfColumns%256],[startRow/256][startRow%256],[startCol/256] [startCol%256],
+     * [goalRow/256][goalRow%256],[goalCol/256][goalCol%256],[0],[1],...,[1]
      */
     public byte[] toByteArray() {
         byte[] byteinfo = new byte[12 + numOfRows * numOfColumns];
@@ -241,11 +242,11 @@ public class Maze {
      *             entry and finish points) of the maze we want to build
      */
     public Maze(byte[] info) {
-        this.numOfRows = info[0] * 255 + info[1];
-        this.numOfColumns = info[2] * 255 + info[3];
+        this.numOfRows = info[0] * 256 + info[1];
+        this.numOfColumns = info[2] * 256 + info[3];
         this.MazeInfo = new int[numOfRows][numOfColumns];
-        Position startPos = new Position(info[4] * 255 + info[5], info[6] * 255 + info[7]);
-        Position GoalPos = new Position(info[8] * 255 + info[9], info[10] * 255 + info[11]);
+        Position startPos = new Position(info[4] * 256 + info[5], info[6] * 256 + info[7]);
+        Position GoalPos = new Position(info[8] * 256 + info[9], info[10] * 256 + info[11]);
         setStartPosition(startPos);
         setGoalPosition(GoalPos);
         int CurrentCell = 12;

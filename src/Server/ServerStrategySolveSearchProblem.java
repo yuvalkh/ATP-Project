@@ -12,8 +12,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
-            ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
+            toClient.flush();
+            ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             Maze maze = (Maze)fromClient.readObject();//we get from the user the maze he wants to solve
             SearchableMaze searchableMaze = new SearchableMaze(maze);//we make that a searchable maze
             ISearchingAlgorithm searcher = new BestFirstSearch();//we choose with what we want to search

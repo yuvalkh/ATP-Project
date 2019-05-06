@@ -1,6 +1,7 @@
 package IO;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 
 public class MyCompressorOutputStream extends OutputStream {
     OutputStream out;
-    int lastb = -1;
+
     public MyCompressorOutputStream(OutputStream os) {
         out = os;
     }
@@ -53,7 +54,12 @@ public class MyCompressorOutputStream extends OutputStream {
         for (int i = 0; i < list.size(); i++) {
             finalByte[12 + i] = list.get(i).byteValue();
         }
-        out.write(finalByte);
+        if(out instanceof ObjectOutputStream){
+            ((ObjectOutputStream) out).writeObject(finalByte);
+        }
+        else{
+            out.write(finalByte);
+        }
         out.flush();
     }
 }
