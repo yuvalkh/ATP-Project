@@ -2,6 +2,7 @@ package Client;
 
 import Client.IClientStrategy;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -27,7 +28,13 @@ public class Client {
         }
     }
 
-    public void communicateWithServer() {
+    public void communicateWithServer(){
+        try{
+            Socket theServer = new Socket(serverIP,serverPort);
+            clientStrategy.clientStrategy(theServer.getInputStream(),theServer.getOutputStream());
+            theServer.close();
+        } catch (Exception e){
 
+        }
     }
 }
