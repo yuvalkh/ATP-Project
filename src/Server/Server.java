@@ -44,7 +44,7 @@ public class Server {
                     System.out.println(String.format("Client excepted: %s", clientSocket));
                     new Thread(() -> {
                         handleClient(clientSocket);
-                        System.out.println(String.format("Finished handle client: %s", clientSocket));
+                        //System.out.println(String.format("Finished handle client: %s", clientSocket));
                     }).start();
                 } catch (SocketTimeoutException e) {
                     System.out.println("Socket Timeout - No clients pending!");
