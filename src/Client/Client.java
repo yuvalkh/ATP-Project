@@ -5,6 +5,7 @@ import Client.IClientStrategy;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Client {
     private InetAddress serverIP;

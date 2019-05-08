@@ -8,13 +8,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 /**
  * Created by Aviadjo on 3/2/2017.
  */
 public class Server {
     private int port;
     private int listeningInterval;
+    ExecutorService ThreadPool;
     private IServerStrategy serverStrategy;
     private volatile boolean stop;
     //private static final Logger LOG = LogManager.getLogger(); //Log4j2
@@ -23,6 +25,7 @@ public class Server {
         this.port = port;
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
+        ThreadPool = Executors.newFixedThreadPool(Configurations.getMaxNumberOfThreadsOnServer());
     }
 
     public void start() {
@@ -34,7 +37,7 @@ public class Server {
     private void runServer() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            //serverSocket.setSoTimeout(listeningInterval);
+            serverSocket.setSoTimeout(listeningInterval);
             System.out.println(String.format("Server starter at %s!", serverSocket));
             System.out.println(String.format("Server's Strategy: %s", serverStrategy.getClass().getSimpleName()));
             System.out.println("Server is waiting for clients...");
@@ -42,10 +45,12 @@ public class Server {
                 try {
                     Socket clientSocket = serverSocket.accept(); // blocking call
                     System.out.println(String.format("Client excepted: %s", clientSocket));
+                    ThreadPool.submit(
                     new Thread(() -> {
                         handleClient(clientSocket);
                         //System.out.println(String.format("Finished handle client: %s", clientSocket));
-                    }).start();
+                    })
+                    );
                 } catch (SocketTimeoutException e) {
                     System.out.println("Socket Timeout - No clients pending!");
                 }

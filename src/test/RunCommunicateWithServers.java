@@ -12,12 +12,25 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class RunCommunicateWithServers {
     static int num = 0;
     static Maze firstMaze;
     public static void main(String[] args) {
         //Initializing servers
+        Properties prop = new Properties();
+        prop.setProperty("GenerateMaze Algorithm","MyMazeGenerator");
+        prop.setProperty("Search Algorithm","Best First Search");
+        prop.setProperty("Max Number Of Threads","3");
+        File file = new File("resources/config.properties");
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
 
