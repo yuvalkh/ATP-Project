@@ -1,7 +1,6 @@
 package Server;
 
-import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
-
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -18,14 +17,30 @@ public class Configurations {
     }
 
     public static String getGenerateMazeAlgorithm(){
-        return prop.getProperty("GenerateMaze Algorithm");
+        loadPropertiesFile();
+        return prop.getProperty("GenerateMaze.Algorithm");
     }
 
     public static String getSearchAlgorithm(){
-        return prop.getProperty("Search Algorithm");
+        loadPropertiesFile();
+        return prop.getProperty("Search.Algorithm");
     }
 
     public static int getMaxNumberOfThreadsOnServer(){
-        return Integer.parseInt(prop.getProperty("Max Number Of Threads"));
+        loadPropertiesFile();
+        return Integer.parseInt(prop.getProperty("Max.Number.Of.Threads"));
+    }
+
+    private static void loadPropertiesFile(){
+        File file = new File("resources/config.properties");
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(file);
+            prop.load(inputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -45,7 +45,7 @@ public class Server {
                 try {
                     Socket clientSocket = serverSocket.accept(); // blocking call
                     System.out.println(String.format("Client excepted: %s", clientSocket));
-                    ThreadPool.submit(
+                    ThreadPool.execute(
                     new Thread(() -> {
                         handleClient(clientSocket);
                         //System.out.println(String.format("Finished handle client: %s", clientSocket));

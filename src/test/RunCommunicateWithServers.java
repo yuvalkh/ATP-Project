@@ -19,17 +19,20 @@ public class RunCommunicateWithServers {
     static Maze firstMaze;
     public static void main(String[] args) {
         //Initializing servers
-        Properties prop = new Properties();
-        prop.setProperty("GenerateMaze Algorithm","MyMazeGenerator");
-        prop.setProperty("Search Algorithm","Best First Search");
-        prop.setProperty("Max Number Of Threads","3");
+        /*Properties prop = new Properties();
+        prop.setProperty("GenerateMaze.Algorithm","MyMazeGenerator");
+        prop.setProperty("Search.Algorithm","Best First Search");
+        prop.setProperty("Max.Number.Of.Threads","3");
         File file = new File("resources/config.properties");
         OutputStream outputStream = null;
         try {
             outputStream = new FileOutputStream(file);
+            prop.store(outputStream,"");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
