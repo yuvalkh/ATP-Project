@@ -20,44 +20,42 @@ public class MyCompressorOutputStream extends OutputStream {
     }
 
     /**
-     * need to compress the byte array into something
-     * that is smaller
+     * The compresser will compress it to about 1/8 of its original length.
+     * 00100101 10100101 01100100 01011011 11101000 011001
+     *
      * @param b the info of the maze in bytes
      */
     @Override
     public void write(byte[] b) throws IOException {
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(0);
-        int zeroORone = 0;
+        ArrayList<Byte> list = new ArrayList<>();
+        System.out.println();
+        byte counter = 0;
+        byte sum = 0;
+        byte[] finalByte;
         for (int i = 12; i < b.length; i++) {
-            if(zeroORone == b[i] && list.get(list.size() - 1) < 255){//if it's the same as before and it can increment
-                list.set(list.size() - 1,list.get(list.size() - 1) + 1);
+            if (counter == 8) {
+                list.add(sum);
+                sum = 0;
+                counter = 0;
             }
-            else if(zeroORone == b[i] && list.get(list.size() - 1) >= 255){//if it's the same as before but it cannot be incremented
-                list.add(0);
-                list.add(1);
+            if (b[i] == 1) {
+                sum += Math.pow(2, 7 - counter);
             }
-            else if(zeroORone != b[i] && list.get(list.size() - 1) < 255){//if it's not the same as before
-                list.add(1);
-                if(zeroORone == 1){
-                    zeroORone = 0;
-                }
-                else{
-                    zeroORone = 1;
-                }
-            }
+            counter++;
         }
-        byte[] finalByte = new byte[12+list.size()];
-        for (int i = 0; i < 12 ; i++) {
+        if (sum != 0) {
+            list.add(sum);
+        }
+        finalByte = new byte[12 + list.size()];
+        for (int i = 0; i < 12; i++) {//we copy the properties
             finalByte[i] = b[i];
         }
-        for (int i = 0; i < list.size(); i++) {
-            finalByte[12 + i] = list.get(i).byteValue();
+        for (int i = 0; i < list.size(); i++) {//we copy the compressed maze
+            finalByte[i + 12] = list.get(i);
         }
-        if(out instanceof ObjectOutputStream){
+        if (out instanceof ObjectOutputStream) {
             ((ObjectOutputStream) out).writeObject(finalByte);
-        }
-        else{
+        } else {
             out.write(finalByte);
         }
         out.flush();
