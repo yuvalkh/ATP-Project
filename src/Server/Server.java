@@ -56,6 +56,7 @@ public class Server {
                 }
             }
             serverSocket.close();
+            ThreadPool.shutdown();
         } catch (IOException e) {
             System.out.println("IOException");
         }
@@ -74,6 +75,5 @@ public class Server {
     public void stop() {
        System.out.println("Stopping server...");
         stop = true;
-        ThreadPool.shutdown();
     }
 }
