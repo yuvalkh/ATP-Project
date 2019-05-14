@@ -74,5 +74,6 @@ public class Server {
     public void stop() {
        System.out.println("Stopping server...");
         stop = true;
+        ThreadPool.shutdown();
     }
 }
