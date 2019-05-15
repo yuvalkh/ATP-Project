@@ -21,8 +21,6 @@ public class MyCompressorOutputStream extends OutputStream {
 
     /**
      * The compresser will compress it to about 1/8 of its original length.
-     * 00100101 10100101 01100100 01011011 11101000 011001
-     *
      * @param b the info of the maze in bytes
      */
     @Override
