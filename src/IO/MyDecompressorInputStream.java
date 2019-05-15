@@ -28,6 +28,7 @@ public class MyDecompressorInputStream extends InputStream {
     public int read(byte[] b) throws IOException {
         int numOfRead = 0;
         int LeftOver;
+        int counter = 0;
         int indexCounter = 12;
         int tempSize;
         LinkedList<Byte> current = new LinkedList<>();
@@ -39,7 +40,7 @@ public class MyDecompressorInputStream extends InputStream {
         }
         for (int i = 12; i < Compressed.length; i++) {
             LeftOver = (Compressed[i] & 0xff);
-            if (i != b.length - 1) {//if we're not in the end we just put it with the length 8
+            if (i != Compressed.length - 1) {//if we're not in the end we just put it with the length 8
                 for (int j = 0; j < 8 && LeftOver != 0; j++) {
                     current.addFirst((byte)(LeftOver % 2));
                     LeftOver /= 2;
@@ -51,6 +52,9 @@ public class MyDecompressorInputStream extends InputStream {
             }
             else{//we're not in the end therefore we need to see how much 0 we need to add
                 byte howManyNumbers = (byte)((b.length - 12) % 8);
+                if(howManyNumbers == 0){
+                    howManyNumbers = 8;
+                }
                 for (int j = 0; j < 8 && LeftOver != 0; j++) {
                     current.addFirst((byte)(LeftOver % 2));
                     LeftOver /= 2;
@@ -65,6 +69,13 @@ public class MyDecompressorInputStream extends InputStream {
             }
             current = new LinkedList<>();
         }
+        System.out.println();
+        System.out.println("The Maze Before compress");
+        for (int i = 0; i < b.length; i++) {
+            System.out.print((b[i] & 0xff));
+            System.out.print(" ");
+        }
+        System.out.println();
         return numOfRead;
     }
 }
