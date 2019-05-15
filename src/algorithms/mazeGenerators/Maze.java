@@ -117,7 +117,7 @@ public class Maze implements Serializable {
     /**
      * prints maze with solutions
      */
-
+/*
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -131,8 +131,7 @@ public class Maze implements Serializable {
             System.out.println();
         }
     }
-
-/*
+*/
     public void print() {
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
@@ -153,7 +152,7 @@ public class Maze implements Serializable {
             System.out.println(" " + "\u001B[107m");
         }
     }
-*/
+
     /**
      * generates random start Cell and Goal Cell
      */
@@ -214,23 +213,23 @@ public class Maze implements Serializable {
      */
     public byte[] toByteArray() {
         byte[] byteinfo = new byte[12 + numOfRows * numOfColumns];
-        byteinfo[0] = (byte)(this.numOfRows / 256); //0
-        byteinfo[1] = (byte)(this.numOfRows % 256); //1
-        byteinfo[2] = (byte)(this.numOfColumns / 256); //2
-        byteinfo[3] = (byte)(this.numOfColumns % 256); //3
-        byteinfo[4] = (byte)(this.StartPosition.RowIndex / 256); //4
-        byteinfo[5] = (byte)(this.StartPosition.RowIndex % 256); //5
-        byteinfo[6] = (byte)(this.StartPosition.ColumnIndex / 256); //6
-        byteinfo[7] = (byte)(this.StartPosition.ColumnIndex % 256); //7
-        byteinfo[8] = (byte)(this.GoalPosition.RowIndex / 256); //8
-        byteinfo[9] = (byte)(this.GoalPosition.RowIndex % 256); //9
-        byteinfo[10] = (byte)(this.GoalPosition.ColumnIndex / 256); //10
-        byteinfo[11] = (byte)(this.GoalPosition.ColumnIndex % 256); //11
+        byteinfo[0] = (byte) (this.numOfRows / 256); //0
+        byteinfo[1] = (byte) (this.numOfRows % 256); //1
+        byteinfo[2] = (byte) (this.numOfColumns / 256); //2
+        byteinfo[3] = (byte) (this.numOfColumns % 256); //3
+        byteinfo[4] = (byte) (this.StartPosition.RowIndex / 256); //4
+        byteinfo[5] = (byte) (this.StartPosition.RowIndex % 256); //5
+        byteinfo[6] = (byte) (this.StartPosition.ColumnIndex / 256); //6
+        byteinfo[7] = (byte) (this.StartPosition.ColumnIndex % 256); //7
+        byteinfo[8] = (byte) (this.GoalPosition.RowIndex / 256); //8
+        byteinfo[9] = (byte) (this.GoalPosition.RowIndex % 256); //9
+        byteinfo[10] = (byte) (this.GoalPosition.ColumnIndex / 256); //10
+        byteinfo[11] = (byte) (this.GoalPosition.ColumnIndex % 256); //11
         /**now we save the mazeInfo**/
         int counter = 12;
         for (int i = 0; i < numOfRows; i++) {
             for (int j = 0; j < numOfColumns; j++) {
-                byteinfo[counter] = (byte)(getMazeInfo(i, j));
+                byteinfo[counter] = (byte) (getMazeInfo(i, j));
                 counter++;
             }
         }
@@ -243,20 +242,18 @@ public class Maze implements Serializable {
      *             entry and finish points) of the maze we want to build
      */
     public Maze(byte[] info) {
-        this.numOfRows = info[0] * 256 + info[1];
-        this.numOfColumns = info[2] * 256 + info[3];
+        this.numOfRows = info[0] * 256 + (info[1] & 0xff);
+        this.numOfColumns = info[2] * 256 + (info[3] & 0xff);
         this.MazeInfo = new int[numOfRows][numOfColumns];
-        Position startPos = new Position(info[4] * 256 + info[5], info[6] * 256 + info[7]);
-        Position GoalPos = new Position(info[8] * 256 + info[9], info[10] * 256 + info[11]);
+        Position startPos = new Position(info[4] * 256 + (info[5] & 0xff), info[6] * 256 + (info[7] & 0xff));
+        Position GoalPos = new Position(info[8] * 256 + (info[9] & 0xff), info[10] * 256 + (info[11] & 0xff));
         setStartPosition(startPos);
         setGoalPosition(GoalPos);
         int CurrentCell = 12;
-        for (int row = 0; row < this.numOfRows; row++) {
+        for (int row = 0; row < numOfRows; row++) {
             for (int col = 0; col < numOfColumns; col++) {
-                if (CurrentCell < info.length) {
-                    setMazeInfo(row, col, info[CurrentCell]);
-                    CurrentCell++;
-                }
+                setMazeInfo(row, col, info[CurrentCell]);
+                CurrentCell++;
             }
         }
     }

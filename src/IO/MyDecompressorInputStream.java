@@ -28,7 +28,6 @@ public class MyDecompressorInputStream extends InputStream {
     public int read(byte[] b) throws IOException {
         int numOfRead = 0;
         int LeftOver;
-        int counter = 0;
         int indexCounter = 12;
         int tempSize;
         LinkedList<Byte> current = new LinkedList<>();
@@ -69,13 +68,6 @@ public class MyDecompressorInputStream extends InputStream {
             }
             current = new LinkedList<>();
         }
-        System.out.println();
-        System.out.println("The Maze Before compress");
-        for (int i = 0; i < b.length; i++) {
-            System.out.print((b[i] & 0xff));
-            System.out.print(" ");
-        }
-        System.out.println();
         return numOfRead;
     }
 }
