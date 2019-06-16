@@ -5,8 +5,7 @@ import Server.*;
 import Client.*;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.search.AState;
-import algorithms.search.Solution;
+import algorithms.search.*;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -21,7 +20,6 @@ public class RunCommunicateWithServers {
         //Initializing servers
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-        //Server stringReverserServer = new Server(5402, 1000, new ServerStrategyStringReverser());
 
         //Starting  servers
         solveSearchProblemServer.start();
@@ -90,35 +88,6 @@ public class RunCommunicateWithServers {
                         for (int i = 0; i < mazeSolutionSteps.size(); i++) {
                             System.out.println(String.format("%s. %s", i, mazeSolutionSteps.get(i).toString()));
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            client.communicateWithServer();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void CommunicateWithServer_StringReverser() {
-        try {
-            Client client = new Client(InetAddress.getLocalHost(), 5402, new IClientStrategy() {
-                @Override
-                public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
-                    try {
-                        BufferedReader fromServer = new BufferedReader(new InputStreamReader(inFromServer));
-                        PrintWriter toServer = new PrintWriter(outToServer);
-
-                        String message = "Client Message";
-                        String serverResponse;
-                        toServer.write(message + "\n");
-                        toServer.flush();
-                        serverResponse = fromServer.readLine();
-                        System.out.println(String.format("Server response: %s", serverResponse));
-                        toServer.flush();
-                        fromServer.close();
-                        toServer.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

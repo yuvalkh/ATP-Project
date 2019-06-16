@@ -35,7 +35,7 @@ public class Client {
             clientStrategy.clientStrategy(theServer.getInputStream(),theServer.getOutputStream());
             theServer.close();
         } catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

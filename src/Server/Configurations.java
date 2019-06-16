@@ -15,52 +15,51 @@ import java.util.Properties;
  */
 public class Configurations {
 
-    static Properties prop;
+    private static Properties prop;
+    private static String path;
     private Configurations(){//private constructor in order that this class will be static
 
     }
 
     public static String getGenerateMazeAlgorithm(){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         return prop.getProperty("GenerateMaze.Algorithm");
     }
 
     public static String getSearchAlgorithm(){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         return prop.getProperty("Search.Algorithm");
     }
 
     public static int getMaxNumberOfThreadsOnServer(){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         return Integer.parseInt(prop.getProperty("Max.Number.Of.Threads"));
     }
 
     public static void setGenerateMazeAlgorithm(String GenerateMazeAlgorithm){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         prop.setProperty("GenerateMaze.Algorithm",GenerateMazeAlgorithm);
     }
 
     public static void setSearchAlgorithm(String SearchAlgorithm){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         prop.setProperty("Search.Algorithm",SearchAlgorithm);
     }
 
     public static void setMaxNumberOfThreadsOnServer(String MaxNumberOfThreadsOnServer){
-        loadPropertiesFile();
+        //loadPropertiesFile();
         prop.setProperty("Max.Number.Of.Threads",MaxNumberOfThreadsOnServer);
     }
 
-    public static File loadFile(){
-        final FileChooser fc = new FileChooser();
-        Stage stage = new Stage();
-        File returnVal = fc.showOpenDialog(stage);
-        return returnVal;
+    public static void loadFilePath(String Path){
+        path = Path;
+        loadPropertiesFile();
     }
 
     private static void loadPropertiesFile(){
         if(prop == null) {//we need to load it
             prop = new Properties();
-            File file = loadFile();
+            File file = new File(path);
             InputStream inputStream;
             try {
                 inputStream = new FileInputStream(file);

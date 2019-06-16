@@ -21,6 +21,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             while (!stack.isEmpty()) {
                 temp = stack.pop();
                 if (s.getStartState().equals(temp)) {
+                    System.out.println("Found");
                     break;
                 }
                     for (AState adjState : s.getAllSuccessors(temp)) {

@@ -1,23 +1,14 @@
 package Server;
 
-import IO.MyCompressorOutputStream;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
-
-import javax.tools.FileObject;
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
     static int FileID = 1;
-    Properties prop = new Properties();
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
@@ -55,6 +46,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             else{//it equals to Best First Search
                 searcher = new BestFirstSearch();
             }
+            Server.LOG.info("Solving the maze by algorithm: " + Configurations.getSearchAlgorithm());
             Solution solution = searcher.solve(searchableMaze);//we solve the maze
             //now we save the solution
             FileOutputStream f = new FileOutputStream(new File(tempDirectoryPath + "/maze"+ FileID +".txt"));

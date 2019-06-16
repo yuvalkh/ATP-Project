@@ -24,6 +24,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             else{//it equals to MyMazeGenerator
                 mazeGenerator = new MyMazeGenerator();
             }
+            Server.LOG.info("Generating Maze by algorithm: " + Configurations.getGenerateMazeAlgorithm());
             Maze maze = mazeGenerator.generate(properties[0], properties[1]);//now we make the maze
             MyCompressorOutputStream comp = new MyCompressorOutputStream(ToClient);
             comp.write(maze.toByteArray());//now we compress it and send it to the client
